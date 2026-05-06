@@ -62,10 +62,11 @@
 
   <div class="card">
     <h1>Hola amor de mi vida ❤️</h1>
-    <p>Mi primera de muchas</p>
+
+    <p>Mi primera de muchas 💕</p>
 
     <button onclick="mostrarMensaje()">
-      Haz click 💖
+      Haz click ❤️
     </button>
 
     <p id="mensaje"></p>
@@ -73,20 +74,36 @@
     <img id="foto" src="primera.jpeg">
   </div>
 
+  <!-- AUDIO -->
+  <audio id="musica">
+    <source src="birds.mp3" type="audio/mpeg">
+  </audio>
+
   <script>
+
     function mostrarMensaje() {
 
+      // MENSAJE
       document.getElementById("mensaje").innerText =
-        "¡Maravilloso! 🚀";
+        "¡Maravilloso! ❤️";
 
+      // MOSTRAR FOTO
       document.getElementById("foto").style.display =
         "block";
-    }
-  </script>
 
-  <audio autoplay loop>
-  <source src="birds.mp3" type="audio/mpeg">
-  </audio>
+      // REPRODUCIR MUSICA
+      const musica = document.getElementById("musica");
+
+      musica.play()
+        .then(() => {
+          console.log("Música reproduciéndose");
+        })
+        .catch(error => {
+          console.log("Error:", error);
+        });
+    }
+
+  </script>
 
 </body>
 </html>
