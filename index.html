@@ -6,7 +6,6 @@
   <title>Para mi Danish hermosa ❤️</title>
 
   <style>
-
     body {
       margin: 0;
       min-height: 100vh;
@@ -24,7 +23,7 @@
       border-radius: 20px;
       text-align: center;
       box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-      max-width: 420px;
+      max-width: 400px;
       transition: opacity 0.8s ease, transform 0.8s ease;
     }
 
@@ -40,7 +39,6 @@
     p {
       color: #555;
       font-size: 18px;
-      line-height: 1.5;
     }
 
     button {
@@ -54,12 +52,10 @@
       cursor: pointer;
       display: block;
       width: 100%;
-      transition: 0.3s;
     }
 
     button:hover {
       background: #ff2e6a;
-      transform: scale(1.03);
     }
 
     img {
@@ -68,11 +64,6 @@
       border-radius: 15px;
       display: none;
     }
-
-    .siguiente-btn {
-      background: #ff7ca8;
-    }
-
   </style>
 </head>
 
@@ -98,57 +89,38 @@
 
   </div>
 
-  <!-- MUSICA -->
   <audio id="musica">
     <source src="birds.mp3" type="audio/mpeg">
   </audio>
 
   <script>
-
-    // INICIO
     function mostrarMensaje() {
-
       document.getElementById("mensaje").innerText =
         "¡Maravilloso! ❤️";
 
-      document.getElementById("foto").style.display =
-        "block";
+      document.getElementById("foto").style.display = "block";
 
-      const musica =
-        document.getElementById("musica");
-
+      const musica = document.getElementById("musica");
       musica.play();
 
-      // PASAR A PREGUNTA 1
       setTimeout(() => {
-        mostrarPregunta1();
+        mostrarPregunta();
       }, 3000);
     }
 
-
-    // TRANSICION SUAVE
-    function cambiarPantalla(contenidoNuevo) {
-
-      const card =
-        document.getElementById("card");
+    function cambiarPantalla(contenido) {
+      const card = document.getElementById("card");
 
       card.classList.add("ocultar");
 
       setTimeout(() => {
-
-        card.innerHTML = contenidoNuevo;
-
+        card.innerHTML = contenido;
         card.classList.remove("ocultar");
-
       }, 800);
     }
 
-
-    // PREGUNTA 1
-    function mostrarPregunta1() {
-
+    function mostrarPregunta() {
       cambiarPantalla(`
-
         <h1>Pregunta importante 😏</h1>
 
         <p>
@@ -156,61 +128,52 @@
           el follow en Insta?
         </p>
 
-        <button onclick="respuesta1Correcta()">
+        <button onclick="respuestaCorrecta()">
           Nov 2024
         </button>
 
-        <button onclick="respuesta1Incorrecta()">
+        <button onclick="respuestaIncorrecta()">
           Ago 2024
         </button>
 
         <p id="resultado"></p>
 
         <img id="fotoRespuesta" src="">
-
       `);
     }
 
-
-    // RESPUESTA CORRECTA P1
-    function respuesta1Correcta() {
-
+    function respuestaCorrecta() {
       document.getElementById("resultado").innerText =
         "Correcto amor ❤️ ese momento no se me olvida.";
 
-      const foto =
-        document.getElementById("fotoRespuesta");
-
+      const foto = document.getElementById("fotoRespuesta");
       foto.src = "foto2.jpeg";
-
       foto.style.display = "block";
 
-      mostrarBotonSiguiente(mostrarPregunta2);
+      mostrarBotonSiguiente();
     }
 
-
-    // RESPUESTA INCORRECTA P1
-    function respuesta1Incorrecta() {
-
+    function respuestaIncorrecta() {
       document.getElementById("resultado").innerText =
         "JAJA casi amor, pero igual te amo 😂❤️";
 
-      const foto =
-        document.getElementById("fotoRespuesta");
-
+      const foto = document.getElementById("fotoRespuesta");
       foto.src = "foto3.jpeg";
-
       foto.style.display = "block";
 
-      mostrarBotonSiguiente(mostrarPregunta2);
+      mostrarBotonSiguiente();
     }
 
+    function mostrarBotonSiguiente() {
+      const boton = document.createElement("button");
+      boton.innerText = "Siguiente ❤️";
+      boton.onclick = mostrarPregunta2;
 
-    // PREGUNTA 2
+      document.getElementById("card").appendChild(boton);
+    }
+
     function mostrarPregunta2() {
-
       cambiarPantalla(`
-
         <h1>Otra pregunta importante 😏</h1>
 
         <p>
@@ -228,100 +191,26 @@
         <p id="resultado"></p>
 
         <img id="fotoRespuesta" src="">
-
       `);
     }
 
-
-    // RESPUESTA CORRECTA P2
     function respuesta2Correcta() {
-
       document.getElementById("resultado").innerText =
         "Correcto 😂 voy a inventar una máquina del tiempo para salir de la duda =)";
 
-      const foto =
-        document.getElementById("fotoRespuesta");
-
+      const foto = document.getElementById("fotoRespuesta");
       foto.src = "foto5.jpeg";
-
       foto.style.display = "block";
-
-      mostrarPantallaFinal();
     }
 
-
-    // RESPUESTA INCORRECTA P2
     function respuesta2Incorrecta() {
-
       document.getElementById("resultado").innerText =
         "Mmm... yo creo que yo te besé 😏❤️";
 
-      const foto =
-        document.getElementById("fotoRespuesta");
-
+      const foto = document.getElementById("fotoRespuesta");
       foto.src = "foto4.jpeg";
-
       foto.style.display = "block";
-
-      mostrarPantallaFinal();
     }
-
-
-    // BOTON SIGUIENTE
-    function mostrarBotonSiguiente(funcionSiguiente) {
-
-      const boton =
-        document.createElement("button");
-
-      boton.innerText = "Siguiente ❤️";
-
-      boton.classList.add("siguiente-btn");
-
-      boton.onclick = funcionSiguiente;
-
-      document.getElementById("card")
-        .appendChild(boton);
-    }
-
-
-    // FINAL
-    function mostrarPantallaFinal() {
-
-      setTimeout(() => {
-
-        const boton =
-          document.createElement("button");
-
-        boton.innerText =
-          "Final ❤️";
-
-        boton.classList.add("siguiente-btn");
-
-        boton.onclick = () => {
-
-          cambiarPantalla(`
-
-            <h1>Gracias por existir ❤️</h1>
-
-            <p>
-              Tal vez no soy el mejor programador,
-              pero definitivamente eres mi persona
-              favorita en este mundo ❤️
-            </p>
-
-            <img src="fotoFinal.jpeg"
-                 style="display:block;">
-
-          `);
-
-        };
-
-        document.getElementById("card")
-          .appendChild(boton);
-
-      }, 1000);
-    }
-
   </script>
 
 </body>
