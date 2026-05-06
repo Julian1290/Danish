@@ -6,6 +6,7 @@
   <title>Para mi Danish hermosa ❤️</title>
 
   <style>
+
     body {
       margin: 0;
       min-height: 100vh;
@@ -23,7 +24,7 @@
       border-radius: 20px;
       text-align: center;
       box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-      max-width: 400px;
+      max-width: 420px;
       transition: opacity 0.8s ease, transform 0.8s ease;
     }
 
@@ -39,6 +40,7 @@
     p {
       color: #555;
       font-size: 18px;
+      line-height: 1.5;
     }
 
     button {
@@ -52,10 +54,12 @@
       cursor: pointer;
       display: block;
       width: 100%;
+      transition: 0.3s;
     }
 
     button:hover {
       background: #ff2e6a;
+      transform: scale(1.03);
     }
 
     img {
@@ -64,6 +68,11 @@
       border-radius: 15px;
       display: none;
     }
+
+    .siguiente-btn {
+      background: #ff7ca8;
+    }
+
   </style>
 </head>
 
@@ -112,13 +121,13 @@
 
       // PASAR A PREGUNTA 1
       setTimeout(() => {
-        mostrarPregunta();
+        mostrarPregunta1();
       }, 3000);
     }
 
 
-    // PREGUNTA 1
-    function mostrarPregunta() {
+    // TRANSICION SUAVE
+    function cambiarPantalla(contenidoNuevo) {
 
       const card =
         document.getElementById("card");
@@ -127,37 +136,44 @@
 
       setTimeout(() => {
 
+        card.innerHTML = contenidoNuevo;
+
         card.classList.remove("ocultar");
-
-        card.innerHTML = `
-
-          <h1>Pregunta importante 😏</h1>
-
-          <p>
-            ¿En qué año me regresaste
-            el follow en Insta?
-          </p>
-
-          <button onclick="respuestaCorrecta()">
-            Nov 2024
-          </button>
-
-          <button onclick="respuestaIncorrecta()">
-            Ago 2024
-          </button>
-
-          <p id="resultado"></p>
-
-          <img id="fotoRespuesta" src="">
-
-        `;
 
       }, 800);
     }
 
 
+    // PREGUNTA 1
+    function mostrarPregunta1() {
+
+      cambiarPantalla(`
+
+        <h1>Pregunta importante 😏</h1>
+
+        <p>
+          ¿En qué año me regresaste
+          el follow en Insta?
+        </p>
+
+        <button onclick="respuesta1Correcta()">
+          Nov 2024
+        </button>
+
+        <button onclick="respuesta1Incorrecta()">
+          Ago 2024
+        </button>
+
+        <p id="resultado"></p>
+
+        <img id="fotoRespuesta" src="">
+
+      `);
+    }
+
+
     // RESPUESTA CORRECTA P1
-    function respuestaCorrecta() {
+    function respuesta1Correcta() {
 
       document.getElementById("resultado").innerText =
         "Correcto amor ❤️ ese momento no se me olvida.";
@@ -169,15 +185,12 @@
 
       foto.style.display = "block";
 
-      // IR A PREGUNTA 2
-      setTimeout(() => {
-        mostrarPregunta2();
-      }, 5000);
+      mostrarBotonSiguiente(mostrarPregunta2);
     }
 
 
     // RESPUESTA INCORRECTA P1
-    function respuestaIncorrecta() {
+    function respuesta1Incorrecta() {
 
       document.getElementById("resultado").innerText =
         "JAJA casi amor, pero igual te amo 😂❤️";
@@ -189,48 +202,34 @@
 
       foto.style.display = "block";
 
-      // IR A PREGUNTA 2
-      setTimeout(() => {
-        mostrarPregunta2();
-      }, 5000);
+      mostrarBotonSiguiente(mostrarPregunta2);
     }
 
 
     // PREGUNTA 2
     function mostrarPregunta2() {
 
-      const card =
-        document.getElementById("card");
+      cambiarPantalla(`
 
-      card.classList.add("ocultar");
+        <h1>Otra pregunta importante 😏</h1>
 
-      setTimeout(() => {
+        <p>
+          ¿Quién besó a quién en la posada?
+        </p>
 
-        card.classList.remove("ocultar");
+        <button onclick="respuesta2Incorrecta()">
+          Tú me besaste
+        </button>
 
-        card.innerHTML = `
+        <button onclick="respuesta2Correcta()">
+          No lo sabemos
+        </button>
 
-          <h1>Otra pregunta importante 😏</h1>
+        <p id="resultado"></p>
 
-          <p>
-            ¿Quién besó a quién en la posada?
-          </p>
+        <img id="fotoRespuesta" src="">
 
-          <button onclick="respuesta2Incorrecta()">
-            Tú me besaste
-          </button>
-
-          <button onclick="respuesta2Correcta()">
-            No lo sabemos
-          </button>
-
-          <p id="resultado"></p>
-
-          <img id="fotoRespuesta" src="">
-
-        `;
-
-      }, 800);
+      `);
     }
 
 
@@ -246,6 +245,8 @@
       foto.src = "foto5.jpeg";
 
       foto.style.display = "block";
+
+      mostrarPantallaFinal();
     }
 
 
@@ -261,6 +262,64 @@
       foto.src = "foto4.jpeg";
 
       foto.style.display = "block";
+
+      mostrarPantallaFinal();
+    }
+
+
+    // BOTON SIGUIENTE
+    function mostrarBotonSiguiente(funcionSiguiente) {
+
+      const boton =
+        document.createElement("button");
+
+      boton.innerText = "Siguiente ❤️";
+
+      boton.classList.add("siguiente-btn");
+
+      boton.onclick = funcionSiguiente;
+
+      document.getElementById("card")
+        .appendChild(boton);
+    }
+
+
+    // FINAL
+    function mostrarPantallaFinal() {
+
+      setTimeout(() => {
+
+        const boton =
+          document.createElement("button");
+
+        boton.innerText =
+          "Final ❤️";
+
+        boton.classList.add("siguiente-btn");
+
+        boton.onclick = () => {
+
+          cambiarPantalla(`
+
+            <h1>Gracias por existir ❤️</h1>
+
+            <p>
+              Tal vez no soy el mejor programador,
+              pero definitivamente eres mi persona
+              favorita en este mundo ❤️
+            </p>
+
+            <img src="fotoFinal.jpeg"
+                 style="display:block;">
+
+          `);
+
+        };
+
+        document.getElementById("card")
+          .appendChild(boton);
+
+      }, 1000);
     }
 
   </script>
