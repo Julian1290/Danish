@@ -8,21 +8,28 @@
   <style>
     body {
       margin: 0;
-      height: 100vh;
+      min-height: 100vh;
       display: flex;
       justify-content: center;
       align-items: center;
       background: linear-gradient(to right, #ff9a9e, #fad0c4);
       font-family: Arial, sans-serif;
+      padding: 20px;
     }
 
     .card {
       background: white;
-      padding: 40px;
+      padding: 35px;
       border-radius: 20px;
       text-align: center;
       box-shadow: 0 4px 15px rgba(0,0,0,0.2);
       max-width: 400px;
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+
+    .ocultar {
+      opacity: 0;
+      transform: scale(0.95);
     }
 
     h1 {
@@ -35,7 +42,7 @@
     }
 
     button {
-      margin-top: 20px;
+      margin-top: 15px;
       padding: 12px 20px;
       border: none;
       border-radius: 10px;
@@ -43,6 +50,8 @@
       color: white;
       font-size: 16px;
       cursor: pointer;
+      display: block;
+      width: 100%;
     }
 
     button:hover {
@@ -60,13 +69,13 @@
 
 <body>
 
-  <div class="card">
+  <div class="card" id="card">
     <h1>Hola amor de mi vida ❤️</h1>
 
-    <p>No tienes idea de cómo te extraño, te pienso en cada momento y quise hacerte este código de guerra 💕</p>
+    <p>No tienes idea de cómo te extraño, te pienso en cada momento y quise hacerte este código de guerra ❤️</p>
 
     <button onclick="mostrarMensaje()">
-      Estas lista ? dale click ❤️
+      ¿Estás lista? Dale click ❤️
     </button>
 
     <p id="mensaje"></p>
@@ -74,35 +83,68 @@
     <img id="foto" src="primera.jpeg">
   </div>
 
-  <!-- AUDIO -->
   <audio id="musica">
     <source src="birds.mp3" type="audio/mpeg">
   </audio>
 
   <script>
-
     function mostrarMensaje() {
-
-      // MENSAJE
       document.getElementById("mensaje").innerText =
         "¡Maravilloso! ❤️";
 
-      // MOSTRAR FOTO
-      document.getElementById("foto").style.display =
-        "block";
+      document.getElementById("foto").style.display = "block";
 
-      // REPRODUCIR MUSICA
       const musica = document.getElementById("musica");
+      musica.play();
 
-      musica.play()
-        .then(() => {
-          console.log("Música reproduciéndose");
-        })
-        .catch(error => {
-          console.log("Error:", error);
-        });
+      setTimeout(() => {
+        mostrarPregunta();
+      }, 3000);
     }
 
+    function mostrarPregunta() {
+      const card = document.getElementById("card");
+
+      card.classList.add("ocultar");
+
+      setTimeout(() => {
+        card.classList.remove("ocultar");
+
+        card.innerHTML = `
+          <h1>Pregunta importante 😏</h1>
+          <p>¿En qué año me regresaste el follow en Insta?</p>
+
+          <button onclick="respuestaCorrecta()">
+            2023
+          </button>
+
+          <button onclick="respuestaIncorrecta()">
+            2024
+          </button>
+
+          <p id="resultado"></p>
+          <img id="fotoRespuesta" src="">
+        `;
+      }, 800);
+    }
+
+    function respuestaCorrecta() {
+      document.getElementById("resultado").innerText =
+        "Correcto amor ❤️ ese momento no se me olvida.";
+
+      const foto = document.getElementById("fotoRespuesta");
+      foto.src = "foto2.jpeg";
+      foto.style.display = "block";
+    }
+
+    function respuestaIncorrecta() {
+      document.getElementById("resultado").innerText =
+        "JAJA casi amor, pero igual te amo 😭❤️";
+
+      const foto = document.getElementById("fotoRespuesta");
+      foto.src = "foto3.jpeg";
+      foto.style.display = "block";
+    }
   </script>
 
 </body>
