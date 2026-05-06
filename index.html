@@ -70,9 +70,14 @@
 <body>
 
   <div class="card" id="card">
+
     <h1>Hola amor de mi vida ❤️</h1>
 
-    <p>No tienes idea de cómo te extraño, te pienso en cada momento y quise hacerte este código de guerra ❤️</p>
+    <p>
+      No tienes idea de cómo te extraño,
+      te pienso en cada momento y quise
+      hacerte este código de guerra ❤️
+    </p>
 
     <button onclick="mostrarMensaje()">
       ¿Estás lista? Dale click ❤️
@@ -81,38 +86,57 @@
     <p id="mensaje"></p>
 
     <img id="foto" src="primera.jpeg">
+
   </div>
 
+  <!-- MUSICA -->
   <audio id="musica">
     <source src="birds.mp3" type="audio/mpeg">
   </audio>
 
   <script>
+
+    // INICIO
     function mostrarMensaje() {
+
       document.getElementById("mensaje").innerText =
         "¡Maravilloso! ❤️";
 
-      document.getElementById("foto").style.display = "block";
+      document.getElementById("foto").style.display =
+        "block";
 
-      const musica = document.getElementById("musica");
+      const musica =
+        document.getElementById("musica");
+
       musica.play();
 
+      // PASAR A PREGUNTA 1
       setTimeout(() => {
         mostrarPregunta();
       }, 3000);
     }
 
+
+    // PREGUNTA 1
     function mostrarPregunta() {
-      const card = document.getElementById("card");
+
+      const card =
+        document.getElementById("card");
 
       card.classList.add("ocultar");
 
       setTimeout(() => {
+
         card.classList.remove("ocultar");
 
         card.innerHTML = `
+
           <h1>Pregunta importante 😏</h1>
-          <p>¿En qué año me regresaste el follow en Insta?</p>
+
+          <p>
+            ¿En qué año me regresaste
+            el follow en Insta?
+          </p>
 
           <button onclick="respuestaCorrecta()">
             Nov 2024
@@ -123,28 +147,122 @@
           </button>
 
           <p id="resultado"></p>
+
           <img id="fotoRespuesta" src="">
+
         `;
+
       }, 800);
     }
 
+
+    // RESPUESTA CORRECTA P1
     function respuestaCorrecta() {
+
       document.getElementById("resultado").innerText =
         "Correcto amor ❤️ ese momento no se me olvida.";
 
-      const foto = document.getElementById("fotoRespuesta");
+      const foto =
+        document.getElementById("fotoRespuesta");
+
       foto.src = "foto2.jpeg";
+
       foto.style.display = "block";
+
+      // IR A PREGUNTA 2
+      setTimeout(() => {
+        mostrarPregunta2();
+      }, 5000);
     }
 
+
+    // RESPUESTA INCORRECTA P1
     function respuestaIncorrecta() {
-      document.getElementById("resultado").innerText =
-        "JAJA casi amor, pero igual te amo 😭❤️";
 
-      const foto = document.getElementById("fotoRespuesta");
+      document.getElementById("resultado").innerText =
+        "JAJA casi amor, pero igual te amo 😂❤️";
+
+      const foto =
+        document.getElementById("fotoRespuesta");
+
       foto.src = "foto3.jpeg";
+
+      foto.style.display = "block";
+
+      // IR A PREGUNTA 2
+      setTimeout(() => {
+        mostrarPregunta2();
+      }, 5000);
+    }
+
+
+    // PREGUNTA 2
+    function mostrarPregunta2() {
+
+      const card =
+        document.getElementById("card");
+
+      card.classList.add("ocultar");
+
+      setTimeout(() => {
+
+        card.classList.remove("ocultar");
+
+        card.innerHTML = `
+
+          <h1>Otra pregunta importante 😏</h1>
+
+          <p>
+            ¿Quién besó a quién en la posada?
+          </p>
+
+          <button onclick="respuesta2Incorrecta()">
+            Tú me besaste
+          </button>
+
+          <button onclick="respuesta2Correcta()">
+            No lo sabemos
+          </button>
+
+          <p id="resultado"></p>
+
+          <img id="fotoRespuesta" src="">
+
+        `;
+
+      }, 800);
+    }
+
+
+    // RESPUESTA CORRECTA P2
+    function respuesta2Correcta() {
+
+      document.getElementById("resultado").innerText =
+        "Correcto 😂 voy a inventar una máquina del tiempo para salir de la duda =)";
+
+      const foto =
+        document.getElementById("fotoRespuesta");
+
+      foto.src = "foto5.jpeg";
+
       foto.style.display = "block";
     }
+
+
+    // RESPUESTA INCORRECTA P2
+    function respuesta2Incorrecta() {
+
+      document.getElementById("resultado").innerText =
+        "Mmm... yo creo que yo te besé 😏❤️";
+
+      const foto =
+        document.getElementById("fotoRespuesta");
+
+      foto.src = "foto4.jpeg";
+
+      foto.style.display = "block";
+    }
+
   </script>
 
 </body>
