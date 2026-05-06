@@ -22,6 +22,7 @@
       border-radius: 20px;
       text-align: center;
       box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+      max-width: 400px;
     }
 
     h1 {
@@ -47,6 +48,13 @@
     button:hover {
       background: #ff2e6a;
     }
+
+    img {
+      margin-top: 20px;
+      width: 100%;
+      border-radius: 15px;
+      display: none;
+    }
   </style>
 </head>
 
@@ -54,19 +62,25 @@
 
   <div class="card">
     <h1>Hola amor de mi vida ❤️</h1>
-    <p>Mi primera de muchas </p>
+    <p>Mi primera de muchas</p>
 
     <button onclick="mostrarMensaje()">
       Haz click 💖
     </button>
 
     <p id="mensaje"></p>
+
+    <img id="foto" src="primera.jpeg">
   </div>
 
   <script>
     function mostrarMensaje() {
+
       document.getElementById("mensaje").innerText =
         "¡Maravilloso! 🚀";
+
+      document.getElementById("foto").style.display =
+        "block";
     }
   </script>
 
