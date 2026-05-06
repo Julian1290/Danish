@@ -39,6 +39,7 @@
     p {
       color: #555;
       font-size: 18px;
+      line-height: 1.5;
     }
 
     button {
@@ -52,10 +53,12 @@
       cursor: pointer;
       display: block;
       width: 100%;
+      transition: 0.3s;
     }
 
     button:hover {
       background: #ff2e6a;
+      transform: scale(1.03);
     }
 
     img {
@@ -89,38 +92,85 @@
 
   </div>
 
+  <!-- MUSICA -->
   <audio id="musica">
     <source src="birds.mp3" type="audio/mpeg">
   </audio>
 
   <script>
+
+    // INICIO
     function mostrarMensaje() {
+
       document.getElementById("mensaje").innerText =
         "¡Maravilloso! ❤️";
 
-      document.getElementById("foto").style.display = "block";
+      document.getElementById("foto").style.display =
+        "block";
 
-      const musica = document.getElementById("musica");
+      const musica =
+        document.getElementById("musica");
+
       musica.play();
 
       setTimeout(() => {
-        mostrarPregunta();
+        mostrarPregunta1();
       }, 3000);
     }
 
+
+    // TRANSICION
     function cambiarPantalla(contenido) {
-      const card = document.getElementById("card");
+
+      const card =
+        document.getElementById("card");
 
       card.classList.add("ocultar");
 
       setTimeout(() => {
+
         card.innerHTML = contenido;
+
         card.classList.remove("ocultar");
+
       }, 800);
     }
 
-    function mostrarPregunta() {
+
+    // RESULTADOS
+    function mostrarResultado(
+      mensaje,
+      foto,
+      siguienteFuncion
+    ) {
+
+      document.getElementById("resultado")
+        .innerText = mensaje;
+
+      const imagen =
+        document.getElementById("fotoRespuesta");
+
+      imagen.src = foto;
+
+      imagen.style.display = "block";
+
+      const boton =
+        document.createElement("button");
+
+      boton.innerText = "Siguiente ❤️";
+
+      boton.onclick = siguienteFuncion;
+
+      document.getElementById("card")
+        .appendChild(boton);
+    }
+
+
+    // PREGUNTA 1
+    function mostrarPregunta1() {
+
       cambiarPantalla(`
+
         <h1>Pregunta importante 😏</h1>
 
         <p>
@@ -128,89 +178,252 @@
           el follow en Insta?
         </p>
 
-        <button onclick="respuestaCorrecta()">
+        <button onclick="
+          mostrarResultado(
+            'Correcto amor ❤️ ese momento no se me olvida.',
+            'foto2.jpeg',
+            mostrarPregunta2
+          )
+        ">
           Nov 2024
         </button>
 
-        <button onclick="respuestaIncorrecta()">
+        <button onclick="
+          mostrarResultado(
+            'JAJA casi amor, pero igual te amo 😂❤️',
+            'foto3.jpeg',
+            mostrarPregunta2
+          )
+        ">
           Ago 2024
         </button>
 
         <p id="resultado"></p>
 
         <img id="fotoRespuesta" src="">
+
       `);
     }
 
-    function respuestaCorrecta() {
-      document.getElementById("resultado").innerText =
-        "Correcto amor ❤️ ese momento no se me olvida.";
 
-      const foto = document.getElementById("fotoRespuesta");
-      foto.src = "foto2.jpeg";
-      foto.style.display = "block";
-
-      mostrarBotonSiguiente();
-    }
-
-    function respuestaIncorrecta() {
-      document.getElementById("resultado").innerText =
-        "JAJA casi amor, pero igual te amo 😂❤️";
-
-      const foto = document.getElementById("fotoRespuesta");
-      foto.src = "foto3.jpeg";
-      foto.style.display = "block";
-
-      mostrarBotonSiguiente();
-    }
-
-    function mostrarBotonSiguiente() {
-      const boton = document.createElement("button");
-      boton.innerText = "Siguiente ❤️";
-      boton.onclick = mostrarPregunta2;
-
-      document.getElementById("card").appendChild(boton);
-    }
-
+    // PREGUNTA 2
     function mostrarPregunta2() {
+
       cambiarPantalla(`
+
         <h1>Otra pregunta importante 😏</h1>
 
         <p>
           ¿Quién besó a quién en la posada?
         </p>
 
-        <button onclick="respuesta2Incorrecta()">
+        <button onclick="
+          mostrarResultado(
+            'Mmm... yo creo que yo te besé 😏❤️',
+            'foto4.jpeg',
+            mostrarPregunta3
+          )
+        ">
           Tú me besaste
         </button>
 
-        <button onclick="respuesta2Correcta()">
+        <button onclick="
+          mostrarResultado(
+            'Correcto 😂 voy a inventar una máquina del tiempo para salir de la duda =)',
+            'foto5.jpeg',
+            mostrarPregunta3
+          )
+        ">
           No lo sabemos
         </button>
 
         <p id="resultado"></p>
 
         <img id="fotoRespuesta" src="">
+
       `);
     }
 
-    function respuesta2Correcta() {
-      document.getElementById("resultado").innerText =
-        "Correcto 😂 voy a inventar una máquina del tiempo para salir de la duda =)";
 
-      const foto = document.getElementById("fotoRespuesta");
-      foto.src = "foto5.jpeg";
-      foto.style.display = "block";
+    // PREGUNTA 3
+    function mostrarPregunta3() {
+
+      cambiarPantalla(`
+
+        <h1>Pregunta de paciencia ❤️</h1>
+
+        <p>
+          ¿Cuántos meses pasaron
+          para volvernos a ver?
+        </p>
+
+        <button onclick="
+          mostrarResultado(
+            'No sabes cómo se me hicieron eternos ❤️',
+            'foto6.jpeg',
+            mostrarPregunta4
+          )
+        ">
+          5 meses y medio
+        </button>
+
+        <button onclick="
+          mostrarResultado(
+            'Yo ya en este punto no podría no verte, no más 2 meses y te necesito ❤️',
+            'foto7.jpeg',
+            mostrarPregunta4
+          )
+        ">
+          6 meses
+        </button>
+
+        <p id="resultado"></p>
+
+        <img id="fotoRespuesta" src="">
+
+      `);
     }
 
-    function respuesta2Incorrecta() {
-      document.getElementById("resultado").innerText =
-        "Mmm... yo creo que yo te besé 😏❤️";
 
-      const foto = document.getElementById("fotoRespuesta");
-      foto.src = "foto4.jpeg";
-      foto.style.display = "block";
+    // PREGUNTA 4
+    function mostrarPregunta4() {
+
+      cambiarPantalla(`
+
+        <h1>Pregunta cinéfila 🎬</h1>
+
+        <p>
+          ¿Qué película fuimos
+          a ver en otoño en Pachuca?
+        </p>
+
+        <button onclick="
+          mostrarResultado(
+            'Cerca amor pero la vimos en verano 😏',
+            'foto8.jpeg',
+            mostrarPregunta5
+          )
+        ">
+          Superman
+        </button>
+
+        <button onclick="
+          mostrarResultado(
+            'Siuuuu fuimos al estreno de su álbum =)',
+            'foto9.jpeg',
+            mostrarPregunta5
+          )
+        ">
+          Tay Tay
+        </button>
+
+        <p id="resultado"></p>
+
+        <img id="fotoRespuesta" src="">
+
+      `);
     }
+
+
+    // PREGUNTA 5
+    function mostrarPregunta5() {
+
+      cambiarPantalla(`
+
+        <h1>Pregunta tortuguita 🐢</h1>
+
+        <p>
+          ¿Cómo se llamaban las primeras
+          tortugas que liberamos en Puerto?
+        </p>
+
+        <button onclick="
+          mostrarResultado(
+            'Yesssssss si te acordaste ❤️',
+            'foto10.jpeg',
+            mostrarPregunta6
+          )
+        ">
+          Lorenza & Squartatule
+        </button>
+
+        <button onclick="
+          mostrarResultado(
+            'Esperemos que en 20 años se vuelvan a ver =)',
+            'foto11.jpeg',
+            mostrarPregunta6
+          )
+        ">
+          Julian & la Danish
+        </button>
+
+        <p id="resultado"></p>
+
+        <img id="fotoRespuesta" src="">
+
+      `);
+    }
+
+
+    // PREGUNTA 6
+    function mostrarPregunta6() {
+
+      cambiarPantalla(`
+
+        <h1>Última pregunta ❤️</h1>
+
+        <p>
+          ¿A dónde fue nuestro último viaje?
+        </p>
+
+        <button onclick="
+          mostrarResultado(
+            'Sí queríamos ir pero nos dio hueva haha, solo camita ❤️',
+            'foto12.jpeg',
+            mostrarFinal
+          )
+        ">
+          Huasca
+        </button>
+
+        <button onclick="
+          mostrarResultado(
+            'Ashhhhh estuvo fácil, te amooo ❤️',
+            'foto13.jpeg',
+            mostrarFinal
+          )
+        ">
+          Omitlán
+        </button>
+
+        <p id="resultado"></p>
+
+        <img id="fotoRespuesta" src="">
+
+      `);
+    }
+
+
+    // FINAL
+    function mostrarFinal() {
+
+      cambiarPantalla(`
+
+        <h1>Fin por ahora ❤️</h1>
+
+        <p>
+          Gracias por jugar este mini
+          código de guerra ❤️
+        </p>
+
+        <p>
+          Te extraño muchísimo
+          y te amo con todo mi corazón ❤️
+        </p>
+
+      `);
+    }
+
   </script>
 
 </body>
